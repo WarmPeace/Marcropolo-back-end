@@ -1,0 +1,19 @@
+Need to install the following packages:
+  depcheck
+Ok to proceed? (y) Unused dependencies
+* @nestjs/mapped-types
+* @types/graphql-upload
+* apollo-cache-inmemory
+* apollo-client
+* apollo-link-http
+* graphql-tag
+* graphql-upload
+* mysql2
+* socket.io
+Unused devDependencies
+* @nestjs/schematics
+* @types/express
+* @types/jest
+* source-map-support
+* ts-loader
+* tsconfig-paths

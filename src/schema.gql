@@ -1,0 +1,512 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """User id"""
+  id: Int!
+
+  """User email"""
+  email: String!
+
+  """User password"""
+  password: String!
+
+  """Username"""
+  username: String
+
+  """User first name"""
+  firstName: String
+
+  """User last name"""
+  lastName: String
+
+  """User phoneNumber"""
+  phoneNumber: Int
+
+  """isDelete"""
+  isDelete: Int!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+type LineItem {
+  """lineItem id"""
+  id: Int!
+
+  """lineItem quantity"""
+  quantity: Int!
+
+  """Price"""
+  price: Int!
+
+  """product"""
+  product: Int!
+
+  """variant"""
+  variant: Int
+
+  """order id"""
+  orderId: Int!
+
+  """isDelete"""
+  isDelete: Int!
+  order: Order
+}
+
+type Order {
+  """Order id"""
+  id: Int!
+
+  """Order name"""
+  name: String!
+
+  """User id"""
+  user: String!
+
+  """SubtotalPriceSet"""
+  subtotalPriceSet: Int!
+
+  """Order name"""
+  createdAt: DateTime!
+
+  """isDelete"""
+  isDelete: Int!
+  lineItems: [LineItem!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Category {
+  """Category id"""
+  id: Int!
+
+  """Category title"""
+  name: String!
+
+  """Category description"""
+  description: String!
+
+  """Category attributes"""
+  attributes: String
+
+  """isDelete"""
+  isDelete: Int!
+  products: [Product!]
+}
+
+type Variant {
+  """Variant id"""
+  id: Int!
+
+  """Variant title"""
+  color: String!
+
+  """Variant image"""
+  size: String!
+
+  """Variant sku"""
+  sku: String
+
+  """Variant price"""
+  price: Int
+
+  """product Id"""
+  productId: Int
+
+  """product weight"""
+  weight: Int
+
+  """isDelete"""
+  isDelete: Int!
+  product: Product
+}
+
+type GroupPost {
+  """GroupPrice id"""
+  id: Int!
+
+  """GroupPrice title"""
+  title: String!
+
+  """featuredMedia"""
+  content: String
+
+  """medias"""
+  type: String
+
+  """GroupPrice description"""
+  variant: String!
+
+  """featuredMedia"""
+  endAt: String
+
+  """medias"""
+  createdByPage: String
+
+  """medias"""
+  createdAt: String
+
+  """productId"""
+  productId: Int
+  product: Product
+}
+
+type GroupPrice {
+  """GroupPrice id"""
+  id: Int!
+
+  """GroupPrice title"""
+  name: String!
+
+  """GroupPrice description"""
+  description: String!
+
+  """featuredMedia"""
+  totalQuantity: Int
+
+  """productId"""
+  productId: Int
+
+  """medias"""
+  price: Int
+  product: Product
+}
+
+type Product {
+  """Product id"""
+  id: Int!
+
+  """Product title"""
+  name: String!
+
+  """Product description"""
+  description: String!
+
+  """featuredMedia"""
+  featuredMedia: String
+
+  """medias"""
+  medias: String
+
+  """Product handle"""
+  handle: String
+
+  """Product tags"""
+  tags: String
+
+  """Product category"""
+  categoryId: Int
+
+  """Product price"""
+  type: Int
+
+  """isDelete"""
+  isDelete: Int!
+  variants: [Variant!]
+  category: Category
+  groupPrices: [GroupPrice!]
+  groupPosts: [GroupPost!]
+}
+
+type Query {
+  getUsers(search: String!, sort: String!, sortType: String!): [User!]!
+  userById(id: Int!): User!
+  userByUsername(username: String!): User!
+  getProducts(search: String!, sort: String!, sortType: String!): [Product!]!
+  getProductsByUser(type: Int!, minPrice: Int!, maxPrice: Int!, category: Int!): [Product!]!
+  getProductById(id: Int!): Product!
+  getGroupPosts(sort: String!): [GroupPost!]!
+  getOrders(search: String!, sort: String!, sortType: String!): [Order!]!
+  getOrderDetail(id: Int!): Order!
+  lineItem: [LineItem!]!
+  findLineItemsByOrderId(id: Int!): [LineItem!]!
+  getProductCategory(search: String!, sort: String!, sortType: String!): [Category!]!
+  getProductCategoryById(id: Int!): Category!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: Int!, updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  register(createUserInput: CreateUserInput!): User!
+  auth(token: String!): User!
+  createProduct(createProductInput: CreateProductInput!, createVariantInput: [CreateVariantInput!]!, createGroupPriceInput: [CreateGroupPriceInput!]!): Product!
+  createGroupPost(createGroupPostInput: CreateGroupPostInput!): GroupPost!
+  updateProduct(updateProductInput: UpdateProductInput!, updateVariantInput: [UpdateVariantInput!]!, updateGroupPriceInput: [UpdateGroupPriceInput!]!): Product!
+  removeProduct(id: Int!): Product!
+  createOrder(createOrderInput: CreateOrderInput!, createLineItemInput: [CreateLineItemInput!]!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
+  createLineItem(createLineItemInput: CreateLineItemInput!): LineItem!
+  updateLineItem(updateLineItemInput: UpdateLineItemInput!): LineItem!
+  removeLineItem(id: Int!): LineItem!
+  createProductCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateProductCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeProductCategory(id: Int!): Category!
+}
+
+input CreateUserInput {
+  """User email"""
+  email: String!
+
+  """User password"""
+  password: String!
+
+  """Username"""
+  username: String
+
+  """User first name"""
+  firstName: String
+
+  """User last name"""
+  lastName: String
+
+  """User phoneNumber"""
+  phoneNumber: Int
+}
+
+input UpdateUserInput {
+  """User email"""
+  email: String
+
+  """User password"""
+  password: String
+
+  """Username"""
+  username: String
+
+  """User first name"""
+  firstName: String
+
+  """User last name"""
+  lastName: String
+
+  """User phoneNumber"""
+  phoneNumber: Int
+
+  """User email"""
+  id: Int!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input CreateProductInput {
+  """Product title"""
+  name: String!
+
+  """Product description"""
+  description: String!
+
+  """featuredMedia"""
+  featuredMedia: String
+
+  """medias"""
+  medias: String
+
+  """Product handle"""
+  handle: String
+
+  """Product tags"""
+  tags: String
+
+  """Product category"""
+  categoryId: Int
+}
+
+input CreateVariantInput {
+  """Variant title"""
+  color: String!
+
+  """Variant image"""
+  size: String
+
+  """Variant sku"""
+  sku: String
+
+  """Variant price"""
+  price: Int
+
+  """product Id"""
+  weight: Int
+}
+
+input CreateGroupPriceInput {
+  """GroupPrice title"""
+  name: String!
+
+  """GroupPrice description"""
+  description: String!
+
+  """featuredMedia"""
+  totalQuantity: Int
+
+  """medias"""
+  price: Int
+}
+
+input CreateGroupPostInput {
+  """GroupPrice title"""
+  title: String!
+
+  """GroupPrice description"""
+  content: String!
+
+  """featuredMedia"""
+  type: String
+
+  """GroupPrice description"""
+  variant: String!
+
+  """medias"""
+  createdByPage: String
+
+  """productId"""
+  productId: Int
+}
+
+input UpdateProductInput {
+  """Product title"""
+  name: String
+
+  """Product description"""
+  description: String
+
+  """featuredMedia"""
+  featuredMedia: String
+
+  """medias"""
+  medias: String
+
+  """Product handle"""
+  handle: String
+
+  """Product tags"""
+  tags: String
+
+  """Product category"""
+  categoryId: Int
+
+  """Product title"""
+  id: Int!
+}
+
+input UpdateVariantInput {
+  """Variant title"""
+  color: String
+
+  """Variant image"""
+  size: String
+
+  """Variant sku"""
+  sku: String
+
+  """Variant price"""
+  price: Int
+
+  """product Id"""
+  weight: Int
+}
+
+input UpdateGroupPriceInput {
+  """GroupPrice title"""
+  name: String
+
+  """GroupPrice description"""
+  description: String
+
+  """featuredMedia"""
+  totalQuantity: Int
+
+  """medias"""
+  price: Int
+}
+
+input CreateOrderInput {
+  """Order name"""
+  name: String!
+
+  """User id"""
+  user: String!
+
+  """SubtotalPriceSet"""
+  subtotalPriceSet: Int!
+}
+
+input CreateLineItemInput {
+  """quantity"""
+  quantity: Int!
+
+  """price"""
+  price: Int!
+
+  """product id"""
+  product: Int!
+
+  """variant id"""
+  variant: Int!
+}
+
+input UpdateOrderInput {
+  """Order name"""
+  name: String!
+
+  """User id"""
+  user: String!
+
+  """SubtotalPriceSet"""
+  subtotalPriceSet: Int!
+
+  """Order id"""
+  id: Int!
+}
+
+input UpdateLineItemInput {
+  """quantity"""
+  quantity: Int
+
+  """price"""
+  price: Int
+
+  """product id"""
+  product: Int
+
+  """variant id"""
+  variant: Int
+  id: Int!
+}
+
+input CreateCategoryInput {
+  """Category title"""
+  name: String!
+
+  """Category description"""
+  description: String!
+
+  """Category attributes"""
+  attributes: String
+}
+
+input UpdateCategoryInput {
+  """Category title"""
+  name: String
+
+  """Category description"""
+  description: String
+
+  """Category attributes"""
+  attributes: String
+
+  """Category id"""
+  id: Int!
+}
